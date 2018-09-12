@@ -50,14 +50,14 @@ Ideally, you shouldn't need to edit any of the files under "/external" unless yo
 
 ### Overall Process
 In the experiment, participant will go through following sections.
-Throughout the whole experiment, participantID will be passed using the tracking url. 
-`Home`: In this section, an introduction of the experiment will be provided to participant. Participant will need to sign the consent to proceed to next section.
-`Post-questionnaire`: In this section, participant will complete a Pre-experiment questionnaire. 
-`Instructions`: In this section, a detailed instruction of the process for experiment will be provided to participant.
-`Practice Sets`: In this section, 8 practice trail will be provided for participant to get familiar with two kinds of menus
-`Experiments`: In this section, participant will conduct the real experiments. ParticipantID will be used to select the test case from 8 experiment configurations.
-`Post-questionnaire`: In this section, participant will complete a Post-experiment questionnaire.
-`Thank you`
+Throughout the whole experiment, `participantID` will be passed using the tracking url. 
+- `Home`: In this section, an introduction of the experiment will be provided to participant. Participant will need to sign the consent to proceed to next section.
+- `Post-questionnaire`: In this section, participant will complete a Pre-experiment questionnaire. 
+- `Instructions`: In this section, a detailed instruction of the process for experiment will be provided to participant.
+- `Practice Sets`: In this section, 8 practice trail will be provided for participant to get familiar with two kinds of menus
+- `Experiments`: In this section, participant will conduct the real experiments. ParticipantID will be used to select the test case from 8 experiment configurations.
+- `Post-questionnaire`: In this section, participant will complete a Post-experiment questionnaire.
+- `Thank you`
 
 ### Experiment Output
 
