@@ -33,7 +33,7 @@ This repository contains a basic interface and instrumentation to perform an emp
          ├── experiment_7.csv     # Contains arrangement of trials for participant 7
          ├── experiment_8.csv     # Contains arrangement of trials for participant 8
          ├── menu_depth_1_breadth_2.csv   # Menu with depth 1 and breadth 2
-		       ├── menu_depth_1_breadth_4.csv   # Menu with depth 1 and breadth 4
+	 ├── menu_depth_1_breadth_4.csv   # Menu with depth 1 and breadth 4
          ├── menu_depth_2_breadth_2.csv   # Menu with depth 2 and breadth 2
          ├── menu_depth_2_breadth_4.csv   # Menu with depth 2 and breadth 4
          ├── manu_depth_3_breadth_2.csv   # Menu with depth 3 and breadth 2
@@ -48,17 +48,25 @@ This repository contains a basic interface and instrumentation to perform an emp
 
 Ideally, you shouldn't need to edit any of the files under "/external" unless your experimental design requires modifications to the menu implementation. Please avoid tweaking parameters of the menu such as color, size etc. To maintain consistency across the class we will use the default parameters as provided in this repository.
 
-### Overall process
+### Overall Process
 In the experiment, participant will go through following sections.
-Throughout the whole experiment, participantID will be passed using 
+Throughout the whole experiment, participantID will be passed using the tracking url. 
 `Home`: In this section, an introduction of the experiment will be provided to participant. Participant will need to sign the consent to proceed to next section.
-`Post-questionnaire`: In this section, participant will complete a Pre-experiment questionnaire.
+`Post-questionnaire`: In this section, participant will complete a Pre-experiment questionnaire. 
 `Instructions`: In this section, a detailed instruction of the process for experiment will be provided to participant.
 `Practice Sets`: In this section, 8 practice trail will be provided for participant to get familiar with two kinds of menus
-`Experiments`: In this section, participant will conduct the real experiments.
+`Experiments`: In this section, participant will conduct the real experiments. ParticipantID will be used to select the test case from 8 experiment configurations.
 `Post-questionnaire`: In this section, participant will complete a Post-experiment questionnaire.
 `Thank you`
 
+### Experiment Output
+
+- pre-questionaire_participant_{participantID}.csv
+`Age, Gender, Education, Occupation, Computer using frequency, OS, device, Familiar with Marking Menu, Familiar with Radial Menu`
+- experiment_participant_{participantID}.csv          
+`Trial,Attempt,Menu Type,Menu Depth,Menu Breadth,Target Item,Selected Item,Attempt Count,Start Time,End Time`
+- post-questionaire_participant_{participantID}.csv
+`Marking Menu ease of use, Radial Menu ease of use, Marking Menu accuracy, Radial Menu accuracy, Marking Menu using preference, Radial Menu using preference, Occupation, Occupation, Occupation`
 
 ### Marking Menu 
 - Popup: Left Mouse Down
