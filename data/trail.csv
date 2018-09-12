@@ -1,0 +1,9 @@
+Menu Type,Menu Depth,Menu Breadth,Device,Target Item
+Marking,1,2,Mouse,Food
+Marking,1,2,Touchpad,Food
+Marking,3,2,Mouse,Cats
+Marking,3,4,Touchpad,France
+Radial,1,2,Mouse,Food
+Radial,1,2,Touchpad,Food
+Radial,3,2,Mouse,Cats
+Radial,3,4,Touchpad,France

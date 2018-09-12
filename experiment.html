@@ -5,21 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Experiment to compare Marking and Radial menus</title>
+    <title>Experiment to compare Marking and Radial menus - Experiment</title>
 
 	<!-- Marking Menu Stylesheet -->
    <link href="./css/external/marking-menu.css" rel="stylesheet">
 	<!-- Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Stint+Ultra+Condensed' rel='stylesheet' type='text/css'>
 	<!-- Experiment Stylesheet -->
-	<link href="./css/experiment.css" rel="stylesheet"> 
+
+  <link rel="stylesheet" href="./css/bootstrap.css">
+	<link href="./css/experiment.css" rel="stylesheet">
 
 
   </head>
   <body onload="initExperiment()" >
-
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+      <div class="container">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" >Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Instructions</a>
+        </li>
+        <li class="nav-item" id="trail">
+          <a class="nav-link" >Practice Sets</a>
+        </li>
+        <li class="nav-item" id="real">
+          <a class="nav-link" >Experiments</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Post-questionnaire</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" >Thank you</a>
+        </li>
+      </ul>
+    </div>
+    </nav>
 	<!-- State Div -->
-    <div class="row" id="state-container">
+    <div class="row" id="state-container" style="margin-top:80px">
       <div class="cellstate">
 	<span class="label label-primary">Trial</span>
 	<span class="label label-default" id="trialNumber">&nbsp;</span>
@@ -33,8 +58,12 @@
 	<span class="label label-default" id="menuDepth">&nbsp;</span>
       </div>
       <div class="cellstate">
-        <span class="label label-primary">IV 3</span>
-	<span class="label label-default">To be implemented</span>
+        <span class="label label-primary">Menu Breadth</span>
+	<span class="label label-default" id="menuBreadth">&nbsp;</span>
+      </div>
+      <div class="cellstate">
+        <span class="label label-primary">Device</span>
+  <span class="label label-default" id="Device">&nbsp;</span>
       </div>
             <div class="cellstimulusresponse">
         <span class="label label-primary">Please select</span>

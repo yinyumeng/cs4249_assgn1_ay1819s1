@@ -1,10 +1,13 @@
 'use strict';
 
 // Location of data files
-const trialsFile = "./data/experiments.csv"
-const menuL1File = "./data/menu_depth_1.csv"
-const menuL2File = "./data/menu_depth_2.csv"
-const menuL3File = "./data/menu_depth_3.csv"
+var trialsFile = ""
+const menuL1File = "./data/menu_depth_1_breadth_2.csv"
+const menuL2File = "./data/menu_depth_1_breadth_4.csv"
+const menuL3File = "./data/menu_depth_2_breadth_2.csv"
+const menuL4File = "./data/menu_depth_2_breadth_4.csv"
+const menuL5File = "./data/menu_depth_3_breadth_2.csv"
+const menuL6File = "./data/menu_depth_3_breadth_4.csv"
 
 // Global variables
 var menu;
@@ -14,13 +17,21 @@ var currentTrial = 1;
 var markingMenuL1 = [];
 var markingMenuL2 = [];
 var markingMenuL3 = [];
+var markingMenuL4 = [];
+var markingMenuL5 = [];
+var markingMenuL6 = [];
 var radialMenuTree = null;
 var radialMenuL1 = [];
 var radialMenuL2 = [];
 var radialMenuL3 = [];
+var radialMenuL4 = [];
+var radialMenuL5 = [];
+var radialMenuL6 = [];
 var tracker = new ExperimentTracker();
 var markingMenuSubscription = null;
 var radialMenuSvg = null;
+var participantId = "";
+var isTrail ="True";
 
 
 
@@ -37,7 +48,17 @@ function getData(relativePath) {
 
 // Loads the CSV data files on page load and store it to global variables
 function initExperiment() {
+	var url = window.location.href;
+	participantId = window.location.href.split('&')[0].split('participantId=')[1];
+	isTrail = window.location.href.split('isTrail=')[1];
 
+	if (isTrail == "True") {
+		trialsFile = "./data/trail.csv";
+		document.getElementById('trail').className='active';	
+	} else {
+		trialsFile = "./data/experiments_"+participantId+".csv";
+		document.getElementById('real').className='active';	
+	}
 	// Get Trails
 	var data = getData(trialsFile);
 
@@ -47,10 +68,14 @@ function initExperiment() {
 		var cells = records[i].split(",");
 		var menuType = cells[0].trim();
 		var menuDepth = cells[1].trim();
-		var targetItem = cells[2].trim();
+		var menuBreadth = cells[2].trim();
+		var device = cells[3].trim();
+		var targetItem = cells[4].trim();
 		trialsData[i] = {
 			'Menu Type': menuType,
 			'Menu Depth': menuDepth,
+			'Menu Breadth': menuBreadth,
+			'Device': device,
 			'Target Item': targetItem
 		};
 	}
@@ -59,14 +84,23 @@ function initExperiment() {
 	var menuL1Data = getData(menuL1File);
 	var menuL2Data = getData(menuL2File);
 	var menuL3Data = getData(menuL3File);
+	var menuL4Data = getData(menuL4File);
+	var menuL5Data = getData(menuL5File);
+	var menuL6Data = getData(menuL6File);
 	
 	// Format CSV Menu to respective Menu structures
 	markingMenuL1 = formatMarkingMenuData(menuL1Data);
 	markingMenuL2 = formatMarkingMenuData(menuL2Data);
 	markingMenuL3 = formatMarkingMenuData(menuL3Data);
+	markingMenuL4 = formatMarkingMenuData(menuL4Data);
+	markingMenuL5 = formatMarkingMenuData(menuL5Data);
+	markingMenuL6 = formatMarkingMenuData(menuL6Data);
 	radialMenuL1 = formatRadialMenuData(menuL1Data);
 	radialMenuL2 = formatRadialMenuData(menuL2Data);
 	radialMenuL3 = formatRadialMenuData(menuL3Data);
+	radialMenuL4 = formatRadialMenuData(menuL4Data);
+	radialMenuL5 = formatRadialMenuData(menuL5Data);
+	radialMenuL6 = formatRadialMenuData(menuL6Data);
 	
 	//Start the first trial
 	nextTrial();
@@ -87,11 +121,15 @@ function nextTrial() {
 
 		var menuType = trialsData[currentTrial]['Menu Type'];
 		var menuDepth = trialsData[currentTrial]['Menu Depth'];
+		var menuBreadth = trialsData[currentTrial]['Menu Breadth'];
+		var device = trialsData[currentTrial]['Device'];
 		var targetItem = trialsData[currentTrial]['Target Item'];
 
 		document.getElementById("trialNumber").innerHTML = String(currentTrial) + "/" + String(numTrials);
 		document.getElementById("menuType").innerHTML = menuType;
 		document.getElementById("menuDepth").innerHTML = menuDepth;
+		document.getElementById("menuBreadth").innerHTML = menuBreadth;
+		document.getElementById("Device").innerHTML = device;
 		document.getElementById("targetItem").innerHTML = targetItem;
 		document.getElementById("selectedItem").innerHTML = "&nbsp;";
 		// Set IV3 state over here
@@ -100,19 +138,26 @@ function nextTrial() {
 		tracker.trial = currentTrial;
 		tracker.menuType = menuType;
 		tracker.menuDepth = menuDepth;
+		tracker.menuBreadth = menuBreadth;
+		tracker.device = device;
 		tracker.targetItem = targetItem;
 
 		if (menuType === "Marking") {
 				
 			initializeMarkingMenu();
 			
-			if(menuDepth == 1){
+			if(menuDepth == 1 && menuBreadth == 2){
 				menu = MarkingMenu(markingMenuL1, document.getElementById('marking-menu-container'));
-			}
-			else if(menuDepth == 2){
+			}else if(menuDepth == 1 && menuBreadth == 4){
 				menu = MarkingMenu(markingMenuL2, document.getElementById('marking-menu-container'));
-			}else if(menuDepth == 3){
+			}else if(menuDepth == 2 && menuBreadth == 2){
 				menu = MarkingMenu(markingMenuL3, document.getElementById('marking-menu-container'));
+			}else if(menuDepth == 2 && menuBreadth == 4){
+				menu = MarkingMenu(markingMenuL4, document.getElementById('marking-menu-container'));
+			}else if(menuDepth == 3 && menuBreadth == 2){
+				menu = MarkingMenu(markingMenuL5, document.getElementById('marking-menu-container'));
+			}else if(menuDepth == 3 && menuBreadth == 4){
+				menu = MarkingMenu(markingMenuL6, document.getElementById('marking-menu-container'));
 			}
 
 			markingMenuSubscription = menu.subscribe((selection) => markingMenuOnSelect(selection));
@@ -120,13 +165,18 @@ function nextTrial() {
 		} else if (menuType === "Radial") {
 
 			initializeRadialMenu();			
-			if (menuDepth == 1){
+			if (menuDepth == 1 && menuBreadth == 2){
 				menu = createRadialMenu(radialMenuL1);
-			}
-			else if(menuDepth == 2){
+			}else if(menuDepth == 1 && menuBreadth == 4){
 				menu = createRadialMenu(radialMenuL2);
-			}else if(menuDepth == 3){
+			}else if(menuDepth == 2 && menuBreadth == 2){
 				menu = createRadialMenu(radialMenuL3);
+			}else if(menuDepth == 2 && menuBreadth == 4){
+				menu = createRadialMenu(radialMenuL4);
+			}else if(menuDepth == 3 && menuBreadth == 2){
+				menu = createRadialMenu(radialMenuL5);
+			}else if(menuDepth == 3 && menuBreadth == 4){
+				menu = createRadialMenu(radialMenuL6);
 			}
 
 
@@ -137,7 +187,13 @@ function nextTrial() {
 		
 	    var nextButton = document.getElementById("nextButton");
 	    nextButton.innerHTML = "Done";
-		tracker.toCsv();
+	    if (isTrail == "True") {
+	    	alert('You have finished the trail experiment! Please take a break before starting the real experient :)');
+	    	window.location='experiment.html?participantId='+participantId+"&isTrail=False";
+	    } else {
+			tracker.toCsv(participantId);
+			window.location='post-experiment-questionnaire.html?participantId='+participantId;
+	    }
 	}
 }
 
@@ -276,6 +332,7 @@ function toggleRadialMenu(e) {
 	if(tracker.startTime == null){
 	
 		if(radialMenuTree != null){
+			console.log(e);
 				menu = module.exports(radialMenuTree, {
 					x: e.clientX,
 					y: e.clientY
