@@ -61,11 +61,11 @@ Throughout the whole experiment, participantID will be passed using the tracking
 
 ### Experiment Output
 
-- pre-questionaire_participant_{participantID}.csv
+- pre-questionaire_participant_{participantID}.csv :
 `Age, Gender, Education, Occupation, Computer using frequency, OS, device, Familiar with Marking Menu, Familiar with Radial Menu`
-- experiment_participant_{participantID}.csv          
+- experiment_participant_{participantID}.csv :   
 `Trial,Attempt,Menu Type,Menu Depth,Menu Breadth,Target Item,Selected Item,Attempt Count,Start Time,End Time`
-- post-questionaire_participant_{participantID}.csv
+- post-questionaire_participant_{participantID}.csv :
 `Marking Menu ease of use, Radial Menu ease of use, Marking Menu accuracy, Radial Menu accuracy, Marking Menu using preference, Radial Menu using preference, Occupation, Occupation, Occupation`
 
 ### Marking Menu 
