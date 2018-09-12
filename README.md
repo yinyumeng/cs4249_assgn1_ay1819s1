@@ -7,7 +7,7 @@ This repository contains a basic interface and instrumentation to perform an emp
  You may fork this repository to your own Github account and clone your forked version for development. This will also help you use Github pages for hosting if you plan to conduct experiments online.
  
  ## Project Structure
- The interface is a static web project. However because of cross origin restrictions you will need a web server to run the experiment. Either turn on Github Pages(https://pages.github.com/) for your forked repository or setup a local server of your choice.
+ Please check https://yinyumeng.github.io/cs4249_assgn1_ay1819s1/index.html for demo of the project.
  
     ├── css                     # Style Sheets
          ├── external           
