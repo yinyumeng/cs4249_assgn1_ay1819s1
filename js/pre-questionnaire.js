@@ -7,7 +7,9 @@
             participantId === '3' ||
             participantId === '4' ||
             participantId === '5' ||
-            participantId === '6') {
+            participantId === '6' ||
+            participantId === '7' ||
+            participantId === '8') {
 
             toCSV($(this).serializeArray(), participantId);
             window.location='instructions.html?participantId='+participantId;
